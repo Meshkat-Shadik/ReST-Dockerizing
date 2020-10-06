@@ -1,0 +1,23 @@
+version: "3.7"
+services: 
+    db:
+        image: postgres
+        environment:
+          POSTGRES_PASSWORD: mesh
+          POSTGRES_USER: postgres
+          POSTGRES_DB: todo_database
+          hostname: localhost
+        volumes:
+          - ./data:/data/db
+        ports:
+          - "5432:5432"
+
+    web:
+        build: ./
+        command: nodemon -L index.js
+        ports: 
+            - "5000:5000"
+        volumes: 
+            - ./:/usr/src/app
+        depends_on: 
+            - db
