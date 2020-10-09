@@ -8,10 +8,10 @@ services:
           POSTGRES_DB: todo_database
           hostname: localhost
         volumes:
-          - ./data:/data/db
+          - ./data:/var/lib/postgresql/data
         ports:
           - "5432:5432"
-
+        restart: "always"
     web:
         build: ./
         command: nodemon -L index.js
